@@ -1,2 +1,4 @@
 # PRODIGY_WD_02
-StopWatch
+# StopWatch
+# Task No.2
+Using Html,Css and Javascript
