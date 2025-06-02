@@ -1,147 +1,237 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
+/* Root variables for light/dark mode */
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #222;
+  --button-bg: #007bff;
+  --button-hover-bg: #0056b3;
+  --border-color: #ccc;
 }
 
-body{
-    font-family: sans-serif;
-    font-size: 16px;
-    width: 100%;
-    height:100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Orbitron', monospace;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
 }
 
-.outer-circle{
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --button-bg: #1a73e8;
+  --button-hover-bg: #135abe;
+  --border-color: #444;
 }
 
-.animation-bg{
-    background: linear-gradient(-45deg ,#ee7752,orange, #e73c7e,#23a6b5,#23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 7s ease infinite;
+.container {
+  max-width: 400px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@keyframes gradient{
-    0%{
-        background-position: 0% 50%;
-    }
-    50%{
-        background-position: 100% 50%;
-    }
-    100%{
-        background-position: 0% 50%;
-    }
+.heading {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 3rem;
+  color: var(--button-bg);
+  margin-bottom: 0.5rem;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
 }
 
-.inner-circle{
-    width:230px;
-    height: 230px;
-    border-radius: 50%;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.watch {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
 
-.text{
-    color: white;
-    font-size: 21px;
+.outer-circle {
+  width: 160px;
+  height: 160px;
+  border: 6px solid var(--button-bg);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: border-color 0.3s ease;
 }
 
-.minute{
-    font-size: 35px;
+.animation-bg {
+  animation: pulse 1.5s infinite;
 }
 
-.sec{
-    font-size: 35px;
+@keyframes pulse {
+  0% {
+    border-color: var(--button-bg);
+  }
+  50% {
+    border-color: var(--button-hover-bg);
+  }
+  100% {
+    border-color: var(--button-bg);
+  }
 }
 
-.msec{
-    font-size: 35px;
+.inner-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: var(--button-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  user-select: none;
 }
 
-.button-wrapper{
-    width: 250px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
+/* Make each time block fixed width, aligned baseline */
+.text {
+  display: inline-block;
+  width: 3ch; /* enough width for 2 digits */
+  text-align: right;
+  vertical-align: baseline;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
-.button{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid white;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+/* Add colon after minute and second */
+.minute::after,
+.sec::after {
+  content: ":";
+  margin-left: 0.15ch;
+  color: inherit;
+  font-weight: 700;
 }
 
-.button:hover{
-    background-color: white;
-    color: black;
+.button-wrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
 }
 
-.laps{
-    list-style: none;
-    color: white;
-    width: 250px;
-    height: 250px;
-    overflow: none;
-    position: relative;
-    padding: 30px 0;
-    margin-top: 30px;
+.button {
+  background-color: var(--button-bg);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  user-select: none;
+  flex: 1 1 auto;
+  min-width: 90px;
 }
 
-.laps::-webkit-scrollbar{
-    display: none;
+.button:hover:not(.hidden) {
+  background-color: var(--button-hover-bg);
+  transform: scale(1.05);
 }
 
-.lap-item{
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid grey;
-    border-radius: 50px;
-    margin-bottom: 15px;
+.button:active:not(.hidden) {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }
 
-.number{
-    color: aliceblue;
+.hidden {
+  display: none;
 }
 
-.time-stamp{
-    display: inline-block;
-    margin-left: 25px;
+.laps {
+  max-height: 180px;
+  overflow-y: auto;
+  padding-left: 0;
+  margin-top: 1rem;
+  width: 100%;
+  list-style: none;
+  border-top: 1px solid var(--border-color);
+  scrollbar-width: none; /* Firefox */
 }
 
-.lap-clear-button{
-    display: block;
-    position: fixed;
-    z-index: 1000;
-    bottom: 35px;
-    left: 50%;
-    transform: translate(-50%);
-    width: 130px;
-    padding: 10px 0;
-    border-radius: 50px;
-    background-color: #cbc4c4;
-    border: 1px solid white;
-    cursor: pointer;
+.laps::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
-.hidden{
-    visibility: hidden;
+.lap-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+}
+
+.number {
+  color: var(--button-bg);
+}
+
+.lap-clear-button {
+  background-color: transparent;
+  border: none;
+  color: var(--button-bg);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  user-select: none;
+}
+
+.lap-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--button-bg);
+  font-weight: 900;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0 0.3rem;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.lap-delete-btn:hover {
+  color: var(--button-hover-bg);
+}
+
+.lap-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* vertically center items */
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  gap: 1rem;
+}
+
+.lap-clear-button:hover {
+  color: var(--button-hover-bg);
+}
+
+@media (max-width: 400px) {
+  .button {
+    flex: 1 1 100%;
+  }
 }
